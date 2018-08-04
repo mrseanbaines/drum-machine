@@ -1,5 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Anton');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body,
+#root,
+#drum-machine {
+  height: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Anton', sans-serif;
+  background: #9c88ff;
 }

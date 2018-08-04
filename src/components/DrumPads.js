@@ -1,5 +1,21 @@
 import React, { Component } from 'react';
 import DrumPad from './DrumPad';
+import styled from 'styled-components';
+import { Flex } from 'grid-styled';
+
+const Container = styled(Flex)`
+  padding: 8px;
+  max-width: 60%;
+  margin: 0 auto;
+
+  @media (min-width: 768px) {
+    max-width: 40%;
+  }
+
+  @media (min-width: 992px) {
+    max-width: 30%;
+  }
+`
 
 const pads = [
   { key: 'Q', sound: 'kick' },
@@ -31,21 +47,37 @@ class DrumPads extends Component {
     if (e.type === 'keydown') {
       key = e.key;
     }
-    const audio = document.querySelector(`.drum-pad[data-key="${key}"] audio`);
-    if (!audio) return;
+    const pad = document.querySelector(`.drum-pad[data-key="${key}"]`);
+    if (!pad) return;
+
+    const audio = pad.querySelector(`audio`);
     audio.currentTime = 0;
     audio.play();
 
     this.props.displaySound(audio.dataset.sound);
+    this.addTransition(pad);
+  }
+
+  addTransition(el) {
+    const display = document.querySelector(`#display`);
+
+    el.addEventListener('transitionend', this.removeTransition);
+    el.classList.add('active');
+    display.classList.add('active');
+    display.addEventListener('transitionend', this.removeTransition);
+  }
+
+  removeTransition(e) {
+    e.target.classList.remove('active');
   }
 
   render() {
     return (
-      <div id="drum-pads">
+      <Container id="drum-pads" flexWrap="wrap">
         {pads.map(pad =>
           <DrumPad onClick={this.playSound} key={pad.key} pad={pad} />
         )}
-      </div>
+      </Container>
     );
   }
 }
