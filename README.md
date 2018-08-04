@@ -1,5 +1,5 @@
 # Drum Machine
-A random quote generator built using React, Styled Components & Grid Styled
+A drum machine built using React, Styled Components & Grid Styled
 
 ## Setup
 Make sure you have [Node](https://nodejs.org/en/) and [NPM](https://www.npmjs.com/) installed.
