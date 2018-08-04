@@ -1,13 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class DrumPad extends Component {
-  render() {
-    return (
-      <div className="drum-pad">
+const DrumPad = (props) => {
+  const { pad, sound } = props.pad;
 
+  return (
+    <div>
+      <div data-pad={pad.toLowerCase()} onClick={props.onClick} className="drum-pad" id={sound}>
+        {pad}
+        <audio id={pad} className="clip" data-key={pad.toLowerCase()} src={`/sounds/${sound}.wav`}></audio>
       </div>
-    );
-  }
+      <span className="sound">{sound}</span>
+    </div>
+  );
 }
 
 export default DrumPad;
