@@ -47,7 +47,7 @@ const DrumPad = (props) => {
           id={key}
           className="clip"
           data-sound={sound}
-          src={`/sounds/${sound}.wav`}
+          src={`sounds/${sound}.wav`}
         >
         </audio>
       </Pad>
