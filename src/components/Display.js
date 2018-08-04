@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Display extends Component {
-  render() {
-    return (
-      <div id="display">
-
-      </div>
-    );
-  }
+const Display = (props) => {
+  return (
+    <div id="display">
+      {props.sound}
+    </div>
+  );
 }
 
 export default Display;

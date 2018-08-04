@@ -2,46 +2,48 @@ import React, { Component } from 'react';
 import DrumPad from './DrumPad';
 
 const pads = [
-  { pad: 'Q', sound: 'kick' },
-  { pad: 'W', sound: 'hat' },
-  { pad: 'E', sound: 'snare' },
-  { pad: 'A', sound: 'clap' },
-  { pad: 'S', sound: 'bass' },
-  { pad: 'D', sound: 'open-hat' },
-  { pad: 'Z', sound: 'rise' },
-  { pad: 'X', sound: 'sparkles' },
-  { pad: 'C', sound: 'aah' },
+  { key: 'Q', sound: 'kick' },
+  { key: 'W', sound: 'hat' },
+  { key: 'E', sound: 'snare' },
+  { key: 'A', sound: 'clap' },
+  { key: 'S', sound: 'bass' },
+  { key: 'D', sound: 'open-hat' },
+  { key: 'Z', sound: 'rise' },
+  { key: 'X', sound: 'sparkles' },
+  { key: 'C', sound: 'aah' },
 ]
 
 class DrumPads extends Component {
   constructor(props) {
     super(props);
-    this.handleEvent = this.handleEvent.bind(this);
+    this.playSound = this.playSound.bind(this);
   }
 
   componentWillMount() {
-    window.addEventListener('keydown', this.handleEvent);
+    window.addEventListener('keydown', this.playSound);
   }
 
-  handleEvent(e) {
-    let el;
+  playSound(e) {
+    let key;
     if (e.type === 'click') {
-      el = e.target.closest('.drum-pad').dataset.pad;
+      key = e.target.closest('.drum-pad').dataset.key;
     }
     if (e.type === 'keydown') {
-      el = e.key;
+      key = e.key;
     }
-    const audio = document.querySelector(`audio[data-key="${el}"]`);
+    const audio = document.querySelector(`.drum-pad[data-key="${key}"] audio`);
     if (!audio) return;
     audio.currentTime = 0;
     audio.play();
+
+    this.props.displaySound(audio.dataset.sound);
   }
 
   render() {
     return (
       <div id="drum-pads">
         {pads.map(pad =>
-          <DrumPad onClick={this.handleEvent} key={pad.pad} pad={pad} />
+          <DrumPad onClick={this.playSound} key={pad.key} pad={pad} />
         )}
       </div>
     );

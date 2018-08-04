@@ -1,15 +1,26 @@
 import React from 'react';
 
 const DrumPad = (props) => {
-  const { pad, sound } = props.pad;
+  const { key, sound } = props.pad;
 
   return (
     <div>
-      <div data-pad={pad.toLowerCase()} onClick={props.onClick} className="drum-pad" id={sound}>
-        {pad}
-        <audio id={pad} className="clip" data-key={pad.toLowerCase()} src={`/sounds/${sound}.wav`}></audio>
+      <div
+        id={sound}
+        className="drum-pad"
+        data-key={key.toLowerCase()}
+        onClick={props.onClick}
+      >
+        {key}
+        <audio
+          id={key}
+          className="clip"
+          data-sound={sound}
+          src={`/sounds/${sound}.wav`}
+        >
+        </audio>
       </div>
-      <span className="sound">{sound}</span>
+      <span>{sound}</span>
     </div>
   );
 }
