@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import DrumMachine from './DrumMachine';
+import DrumPads from './DrumPads';
+import Display from './Display';
 
 class App extends Component {
   render() {
     return (
-      <div>
-        <DrumMachine />
+      <div id="drum-machine">
+        <DrumPads />
+        <Display />
       </div>
     );
   }
